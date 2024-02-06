@@ -1,0 +1,26 @@
+name: |-
+  京东比价
+desc: |-
+  京东比价 更新时间 2022-02-22 09:09
+icon: |-
+  https://github.com/Toperlock/Quantumult/raw/main/icon/Tom-Jerry/Tom-Jerry-1090.png
+system: |-
+  ios
+
+http:
+
+  mitm:
+    - "api.m.jd.com"
+
+  script:
+# > 京东App 历史价格 
+    - match: ^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig)
+      name: "京东比价_5"
+      type: response
+      require-body: true
+
+script-providers:
+  "京东比价_5":
+    url: https://raw.githubusercontent.com/githubdulong/Script/master/jd_price.js
+    interval: 86400
+
