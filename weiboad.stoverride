@@ -1,0 +1,246 @@
+name: |-
+  Weibo
+desc: |-
+  Weibo去广告
+icon: |-
+  https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Weibo-01.png
+category: |-
+  🛡️去广告
+http:
+
+  mitm:
+    - "api.weibo.*"
+    - "*.api.weibo.*"
+    - "mapi.weibo.*"
+    - "*.uve.weibo.com"
+    - "new.vip.weibo.cn"
+    - "boot.biz.weibo.com"
+
+  url-rewrite:
+# > 微博_AD_Preload@ddgksf2013
+    - >-
+      ^https?:\/\/api\.weibo\.cn\/\d\/ad\/preload - reject-dict
+# > 微博国际版_趋势页热门影片@ddgksf2013
+    - >-
+      ^https?:\/\/api\.weibo\.cn\/\d\/cardlist\?v_f=.*Weibo_intl - reject-dict
+# > 微博_用户推荐弹窗@ddgksf2013
+    - >-
+      ^https?:\/\/api\.weibo\.cn\/\d\/profile\/recommend_popuser - reject-dict
+# > 微博_每日一次的开屏广告请求@ddgksf2013
+    - >-
+      ^https?:\/\/boot.*weibo\.com\/v\d\/ad\/realtime - reject-200
+# > 微博_去除底部超话栏表层浮icon及tips@ddgksf2013
+    - >-
+      ^https?:\/\/api\.weibo\.cn\/\d\/!\/huati\/discovery_home_bottom_getdotinfo - reject-dict
+# > 微博_屏蔽首页左上角每日的弹窗tips@ddgksf2013
+    - >-
+      ^https?:\/\/m?api\.weibo\.c(n|om)\/\d/push/daily - reject-dict
+# > 微博_应用内弹窗广告@ddgksf2013
+    - >-
+      ^https?:\/\/(preload-click|preload-impression)\.uve\.weibo\.com\/(interface\/wbpullad\/wbpullad_click\.php|wbapplua\/get_wbpullad_log\.lua) - reject
+# > 微博_屏蔽sdkconfig请求@ddgksf2013
+    - >-
+      ^https?:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkconfig\.php - reject
+# > 微博_Spotlight@ddgksf2013
+    - >-
+      ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/hot\/hours_spotlight - reject-dict
+# > 微博国际版_屏蔽hotsearch@ddgksf2013
+    - >-
+      ^https?:\/\/weibointl\.api\.weibo\.c(n|om)\/portal\.php\?a=hot_search_users - reject-dict
+# > 微博国际版_屏蔽热推荐@ddgksf2013
+    - >-
+      ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/ad\/weibointl\? - reject-dict
+
+  script:
+# > 微博_首页顶部homeExtend@ddgksf2013
+    - match: ^https?:\/\/api\.weibo\.cn\/\d\/groups\/allgroups\/v\d
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博国际版_帖子下方广告banner@ddgksf2013
+    - match: ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=open_app
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_开屏广告预加载处理@ddgksf2013
+    - match: ^https?:\/\/boot.*weibo\.com\/v\d\/ad\/preload
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_未登陆状态下首页信息流处理@ddgksf2013
+    - match: ^https?:\/\/api\.weibo\.cn\/\d\/\w{5}\/(statuses_unread_hot_timeline|timeline)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_视频信息处理@ddgksf2013
+    - match: ^https?:\/\/api\.weibo\.cn\/\d\/video\/tiny_stream_mid_detail
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_屏蔽发现页面搜索框热词@ddgksf2013
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/\w{5}\/cardlist
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_自定义tab皮肤@zmqcherish
+    - match: ^https://api.weibo.cn/2/!/client/light_skin
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_非会员设置tab皮肤@zmqcherish
+    - match: ^https://new.vip.weibo.cn/littleskin/preview
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博_去广告以及去除各部分推广模块@zmqcherish,@ddgksf2013
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/(searchall|page\?|messageflow)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/statuses/(unread_)?friends(/|_)timeline
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/groups/timeline
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/statuses/(container_timeline|unread_hot_timeline|extend|video_mixtimeline|unread_topic_timeline)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/profile/(me|container_timeline)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/video/(community_tab|remind_info|tiny_stream_video_list)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/search/(finder|container_timeline|container_discover)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/(checkin/show|\!/live/media_homelist|comments/build_comments|container/get_item)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:\/\/m?api\.weibo\.c(n|om)\/\d\/cardlist
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博国际版_屏蔽searching_info@shiro
+    - match: ^https?:\/\/weibointl\.api\.weibo\.c(n|om)\/portal\.php.*user&a=get_searching_info
+      name: "weibo_search_info_150"
+      type: request
+      binary-mode: true
+      timeout: 60
+
+# > 微博国际版_屏蔽search_topic@shiro
+    - match: ^https?:\/\/weibointl\.api\.weibo\.c(n|om)\/portal\.php.*feed&a=search_topic
+      name: "weibo_search_topic_152"
+      type: request
+      binary-mode: true
+      timeout: 60
+
+# > 微博国际版_屏蔽开屏广告@ddgksf2013 
+    - match: ^https?:\/\/weibointl\.api\.weibo\.c(n|om)\/portal\.php.*get_coopen_ads
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博国际版_屏蔽sdkad@ddgksf2013
+    - match: ^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua)
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博国际版_趋势顶部Card去广告@ddgksf2013
+    - match: ^https?:\/\/weibointl\.api\.weibo\.c(n|om)\/portal\.php.*feed&a=trends
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博国际版_屏蔽用户VIP栏@ddgksf2013
+    - match: ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=user_center
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 微博国际版_热搜处理@ddgksf2013
+    - match: ^https?:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=search_topic
+      name: "weibo_json_104"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "weibo_json_104":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/weibo_json.js
+    interval: 86400
+  "weibo_search_info_150":
+    url: http://script.hub/convert/_start_/https://github.com/ddgksf2013/Scripts/raw/master/weibo_search_info.json/_end_/weibo_search_info.json?type=mock&target-app=stash-stoverride
+    interval: 86400
+  "weibo_search_topic_152":
+    url: http://script.hub/convert/_start_/https://github.com/ddgksf2013/Scripts/raw/master/weibo_search_topic.json/_end_/weibo_search_topic.json?type=mock&target-app=stash-stoverride
+    interval: 86400
