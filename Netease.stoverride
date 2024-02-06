@@ -1,0 +1,68 @@
+name: |-
+  Netease
+desc: |-
+  网易云音乐去广告
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netease_Music.png
+category: |-
+  🛡️去广告
+http:
+
+  mitm:
+    - "interface*.music.163.com"
+
+  url-rewrite:
+# > 网易云_评论弹窗
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/music\/partner\/picked\/user\/top - reject-dict
+# > 网易云_位置请求
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/lbs\/gpsStatus\/upload - reject-dict
+# > 网易云_每日推荐Tips
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/homepage\/daily\/song\/elf\/notice - reject-dict
+# > 网易云_通用广告请求
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/ad\/ - reject-dict
+# > 网易云_不知道是个啥
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/sp\/flow - reject-dict
+# > 网易云_屏蔽更新
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/ios\/upgrade - reject-dict
+# > 网易云_LIKE音乐上方推广
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/link\/position\/show\/resource - reject-dict
+# > 网易云_歌单上方推广
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?eapi\/resource-exposure\/config - reject-dict
+# > 网易云_搜索框专词
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/search\/specialkeyword - reject-dict
+# > 网易云_首页右上角激励图标
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/link\/scene\/show\/resource - reject-dict
+# > 网易云_搜索框推荐
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/search\/default - reject-dict
+# > 网易云_评论区下方广告[新版失效]
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/comment\/feed\/inserted - reject-dict
+# > 网易云_评论回复区广告
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/v1\/content\/exposure\/comment - reject-dict
+# > 网易云_搜索页猜你喜欢[卸载重装]
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/search\/rcmd\/keyword - reject-dict
+# > 网易云_搜索框填词
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/search\/default\/keyword - reject-dict
+# > 网易云_评论区右上角
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/comment\/hotcomment\/collect - reject-dict
+# > 网易云_活动推广
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/resource-exposure\/activity\/config - reject-dict
+# > 网易云_VIP歌曲提醒框
+    - >-
+      ^https?:\/\/interface(\d)?\.music\.163\.com\/w?e?api\/vipcenter/tspopup\/get - reject-dict
