@@ -1,0 +1,28 @@
+name: |-
+  boxjs
+desc: |-
+  boxjs
+icon: |-
+  https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BoxJS.png
+
+http:
+
+  mitm:
+    - "boxjs.com"
+    - "boxjs.net"
+    - "*.boxjs.com"
+    - "*.boxjs.net"
+
+  script:
+    - match: ^https?:\/\/(.+\.)?boxjs\.(com|net)
+      name: "chavy.boxjs_1"
+      type: request
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "chavy.boxjs_1":
+    url: https://raw.githubusercontent.com/chavyleung/scripts/master/box/chavy.boxjs.js
+    interval: 86400
+
