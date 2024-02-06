@@ -1,0 +1,35 @@
+name: |-
+  baidumap
+desc: |-
+  baidumap去广告
+icon: |-
+  https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/chxm1023/baidu.png
+category: |-
+  🛡️去广告
+http:
+
+  mitm:
+    - "180.76.76.200"
+    - "newclient.map.baidu.com"
+    - "httpdns.baidubce.com"
+    - "ugc.map.baidu.com"
+
+  url-rewrite:
+# > 百度地图_首页底部推荐@ddgksf2013
+    - >-
+      ^https?:\/\/ugc\.map\.baidu\.com\/govui\/rich_content - reject-200
+# > 百度地图_搜索推广@ddgksf2013
+    - >-
+      ^https?:\/\/newclient\.map\.baidu\.com\/client\/phpui.*qt=hw - reject-200
+# > 百度地图_开屏广告|首页左上角广告@ddgksf2013
+    - >-
+      ^https?:\/\/newclient\.map\.baidu\.com\/client\/phpui2\/\?qt=ads - reject-200
+# > 百度地图_DNS处理@ddgksf2013
+    - >-
+      ^https?:\/\/httpdns\.baidubce\.com - reject-200
+# > 百度地图_各种商业推广@ddgksf2013
+    - >-
+      ^https?:\/\/newclient\.map\.baidu\.com\/client\/crossmarketing - reject-200
+# > 百度地图_我的页面地图动态@ddgksf2013
+    - >-
+      ^https?:\/\/newclient\.map\.baidu\.com\/client\/usersystem\/home\/dynamic - reject-200
