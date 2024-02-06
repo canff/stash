@@ -4,7 +4,8 @@ desc: |-
   boxjs.com
 icon: |-
   https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/BoxJS.png
-
+category: |-
+  📱 功能插件
 http:
 
   mitm:
