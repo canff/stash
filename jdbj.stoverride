@@ -1,12 +1,13 @@
 name: |-
   京东比价
 desc: |-
-  京东比价 更新时间 2022-02-22 09:09
+  京东比价 
 icon: |-
-  https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/softlyx/Bdd1.png
+  https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png
 system: |-
   ios
-
+category: |-
+  📱 功能插件
 http:
 
   mitm:
