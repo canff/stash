@@ -1,0 +1,219 @@
+name: |-
+  WebAdBlock
+desc: |-
+ zxzjhd|nivod4|freeok|netflix|*bdys*|cupfox|cokemv|pornhub|lezhutv|*bimi*|18comic.org|*5y*|*gimy*|*tkznp*|*czzy*|*ikandy*|*libvio*
+icon: |-
+  https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_Safari.png
+category: |-
+  🛡️去广告
+http:
+
+  mitm:
+    - "www.zxzjhd.com"
+    - "m.nivod4.tv"
+    - "*.freeok.*"
+    - "*netflix*"
+    - "*bdys*"
+    - "*cupfox*"
+    - "*cokemv*"
+    - "*pornhub.com"
+    - "*lezhutv*"
+    - "*bimi*"
+    - "18comic.org"
+    - "*5y*"
+    - "*gimy*"
+    - "*tkznp*"
+    - "*czzy*"
+    - "*ikandy*"
+    - "*libvio*"
+
+  url-rewrite:
+# > 05 PornHub[网页优化]@ddgksf2013 - 网站地址：https://cn.pornhub.com
+    - >-
+      ^https?:\/\/(cn|www)\.pornhub\.com\/_xa\/ads - reject-dict
+
+  script:
+# > 08 在线之家[网页优化]@ddgksf2013 - 网站地址：https://www.zxzjhd.com/
+    - match: ^https?:\/\/www\.zxzjhd\.com\/($|[0-9a-zA-Z=_/-]+\.html$)
+      name: "adguard_17"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 08 FreeOk[网页优化]@ddgksf2013 - 网站地址：https://www.freeok.vip
+    - match: ^https?:\/\/www\.freeok\.(vip|pro)(\/$|\/[0-9a-zA-Z=_/-]+\.html$)
+      name: "adguard_17"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 07 哔嘀影视[网页优化]@ddgksf2013 - 网站地址：https://www.bdys01.com 
+    - match: ^https?:\/\/.*bdys.*com\/($|([a-z]+)\/(play\/)?\d+.*$)
+      name: "bdys_21"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 06 茶杯狐[网页优化]@ddgksf2013 - 网站地址：https://cupfox.app
+    - match: ^https?:/\/.*cupfox\.*\/($|[\u4E00-\u9FFFa-zA-Z0-9%=_/-]+$)
+      name: "cupbox_23"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+    - match: ^https?:/\/(cn|www)\.pornhub\.com\/($|(view|video).*$)
+      name: "pornhub_26"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 04 Bimi[网页优化]@ddgksf2013 - 网站地址：https://www.bimi.net
+    - match: ^https?:/\/.*bimi.*net\/($|(vodshow|bangumi|type)\/[0-9a-z-\/]+\/$)
+      name: "bimi_28"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 03 禁漫天堂[网页优化]@ddgksf2013 - 网站地址：https://18comic.org
+    - match: ^https?:\/\/.*18comic\.org\/($|(album|photo).*$)
+      name: "18comic_30"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 02 剧迷[网页优化]@ddgksf2013 - 网站地址：https://gimys.app
+    - match: ^https?:\/\/.*gimy.*\/($|[0-9a-zA-Z=_/-]+\.html$)
+      name: "gimytv_32"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 01 厂长电影[网页优化]@ddgksf2013 - 网站地址：https://czzy.art/
+    - match: ^https?:\/\/.*czzy.*\/($|\?btwaf=\w+$|[0-9a-zA-Z=_/-]+\.html)
+      name: "qianoo_34"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 08 Cokemv[网页优化]@ddgksf2013 - 网站地址：https://cokemv.me 
+    - match: ^https?:/\/cokemv\.me\/($|vod.*$)
+      name: "cokemv_37"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 07 555影视[网页优化]@ddgksf2013 - 网站地址：https://555yy6.com
+    - match: ^https?:\/\/.*5y.*\/($|[0-9a-zA-Z=_/-]+\.html$)
+      name: "555_39"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 06 泥巴影视[网页优化]@Adblock4limbo - 网站地址：https://m.nivod4.tv
+    - match: ^https?:\/\/.*nivod.*\/($|[0-9a-zA-Z=_/-]+\.html)
+      name: "nivod_41"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 05 奈飞鸭[网页优化]@ddgksf2013 - 网站地址：https://yanetflix.com
+    - match: ^https?:\/\/.*netflix.*\/($|[0-9a-zA-Z=_/-]+\.html$)
+      name: "netflix_43"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 04 LeZhu[网页优化]@ddgksf2013 - 网站地址：http://www.lezhutv.com
+    - match: ^https?:/\/.*lezhutv\.com\/($|(type|detail|play|index).*$)
+      name: "lezhu_45"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 03 天空影视[网页优化]@ddgksf2013 - 网站地址：https://tkznp.com/
+    - match: ^https?:\/\/.*tkznp.*com\/($|[0-9a-zA-Z=_/-]+\.html$)
+      name: "tkys_47"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 02 真不卡[网页优化]@ddgksf2013 - 网站地址：https://www.ikandy.fun
+    - match: ^https?:\/\/.*ikandy.*fun\/($|(vod|top).*$)
+      name: "zhenbuka_49"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 01 libvio[网页优化]@ddgksf2013 - 网站地址：https://www.libvio.me
+    - match: ^https?:\/\/.*libvio.*me\/($|[0-9a-zA-Z=_/-]+\.html$)
+      name: "libvio_51"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "adguard_17":
+    url: https://raw.githubusercontent.com/ddgksf2013/Scripts/master/adguard.js
+    interval: 86400
+  "bdys_21":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/bdys.js
+    interval: 86400
+  "cupbox_23":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/cupbox.js
+    interval: 86400
+  "pornhub_26":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/pornhub.js
+    interval: 86400
+  "bimi_28":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/bimi.js
+    interval: 86400
+  "18comic_30":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/18comic.js
+    interval: 86400
+  "gimytv_32":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/gimytv.js
+    interval: 86400
+  "qianoo_34":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/qianoo.js
+    interval: 86400
+  "cokemv_37":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/cokemv.js
+    interval: 86400
+  "555_39":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/555.js
+    interval: 86400
+  "nivod_41":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/nivod.js
+    interval: 86400
+  "netflix_43":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/netflix.js
+    interval: 86400
+  "lezhu_45":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/lezhu.js
+    interval: 86400
+  "tkys_47":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/tkys.js
+    interval: 86400
+  "zhenbuka_49":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/zhenbuka.js
+    interval: 86400
+  "libvio_51":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/libvio.js
+    interval: 86400
