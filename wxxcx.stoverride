@@ -1,0 +1,92 @@
+name: |-
+  微信小程序去广告
+desc: |-
+  去除微信小程序广告
+icon: |-
+  https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/WeChat.png
+category: |-
+  🛡️去广告
+http:
+
+  mitm:
+    - "api.blibee.com"
+    - "ucmp.sf-express.com"
+    - "www.bbkj.work"
+    - "wx.wxqqurl.cn"
+    - "wp3.lobdol.cn"
+    - "awg.enmonster.com"
+    - "mp.weixin.qq.com"
+    - "wx.mygolbs.com"
+    - "jabi.coding.net"
+    - "api.bspapp.com"
+    - "3dd0be8a-54fe-43ff-a0e7-f670c4f20432.bspapp.com"
+    - "*.tslt.xyz"
+    - "g.syshhc.top"
+    - "c.jxjt888.top"
+    - "www.laoguikeji.cn"
+    - "qj.bpojie.com"
+    - "b.tslt.xyz"
+    - "m.xgjyouhui.com"
+    - "www.freeheikeji.cn"
+    - "xcx.xianbaow.com"
+    - "*.smkj33.top"
+    - "*.ddly666.top"
+    - "hkj178.com"
+    - "a.jxjt888.top"
+    - "lysl2020.com"
+    - "www.i3zh.com"
+    - "iosoi.cn"
+    - "jt.jxjt888.top"
+    - "gjsx.vip"
+    - "d.syshhc.top"
+    - "gz.gongzijx.com"
+    - "tvapp.guilaile.cn"
+    - "www.benbenfx.xyz"
+    - "4thdimension.top"
+    - "tan.ipnas.ltd"
+
+  url-rewrite:
+# > 小程序_便利蜂@ddgksf2013
+    - >-
+      ^https?:\/\/api\.blibee\.com\/cvsnotify-api\/cvs\/notify\/app\/banner\/v\d+$ - reject-200
+# > 小程序_顺丰速运@ddgksf2013
+    - >-
+      ^https?:\/\/ucmp\.sf-express\.com\/proxy\/operation-platform\/info-flow-adver\/query$ - reject-200
+
+  script:
+# > 公众号_图文去广告@ddgksf2013
+    - match: ^(http|https):\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad
+      name: "replaceBody_24"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 30
+      argument: |-
+        advertisement-%3Eddgksf2013
+
+# > 小程序_掌上公交@ddgksf2013
+    - match: ^https?:\/\/wx\.mygolbs\.com\/WxBusServer\/ApiData\.do
+      name: "zhangshanggongjiao_26"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 小程序_去广告@ddgksf2013
+    - match: ^(https?://)?([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}(:\d+)?/wp-json/[a-zA-Z0-9_-]+/(mp\/)?v\d/posts
+      name: "applet_28"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "replaceBody_24":
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/replace-body.js
+    interval: 86400
+  "zhangshanggongjiao_26":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/zhangshanggongjiao.js
+    interval: 86400
+  "applet_28":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/applet.js
+    interval: 86400
