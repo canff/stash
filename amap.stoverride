@@ -1,0 +1,121 @@
+name: |-
+  Amap
+desc: |-
+  高德地图去广告
+icon: |-
+  https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/GaodeMap.jpg
+category: |-
+  🛡️去广告
+http:
+
+  mitm:
+    - "*.amap.com"
+
+  url-rewrite:
+# > 高德地图_路线规划下方广告@ddgksf2013
+    - >-
+      ^https?:\/\/.*\.amap\.com\/ws\/faas\/amap-navigation\/card-service-route-plan\? - reject-dict
+# > 高德地图_Tip请求@ddgksf2013
+    - >-
+      ^https?:\/\/.*\.amap\.com\/ws\/boss\/order_web\/\w{8}_information - reject-200
+# > 高德地图_通用广告请求@ddgksf2013
+    - >-
+      ^https?:\/\/.*\.amap\.com\/ws\/asa\/ads_attribution - reject
+# > 高德地图_搜索框scene@ddgksf2013
+    - >-
+      ^https?:\/\/.*\.amap\.com\/ws\/shield\/scene\/recommend - reject-dict
+# > 高德地图_首页左上角gif@ddgksf2013
+    - >-
+      ^https?:\/\/.*\.amap\.com\/uploadimg\/\w+\.gif - reject-img
+# > 高德地图_左下天气@ddgksf2013
+    - >-
+      ^https?:\/\/.*\.amap\.com\/ws\/valueadded\/weather - reject-dict
+
+  script:
+# > 高德地图_amdc处理[Anti已将Amdc分流删除,故更换屏蔽策略]@ddgksf2013
+    - match: ^http:\/\/amdc\.m\.taobao\.com
+      name: "amdc_17"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_底部tab栏角标@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/message\/notice\/list
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_首页右中广告@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/shield\/frogserver\/aocs\/updatable
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_附近页面@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/shield\/search\/nearbyrec_smart
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_打车页面处理@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/promotion-web\/resource
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_首页底部处理@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/faas\/amap-navigation\/main-page
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_开屏广告@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/valueadded\/alimama\/splash_screen
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_首页顶部推广@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/msgbox\/pull
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_我的页面@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/shield\/dsp\/profile\/index\/nodefaas
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+# > 高德地图_搜索框热词@ddgksf2013
+    - match: ^https?:\/\/.*\.amap\.com\/ws\/shield\/search\/new_hotword
+      name: "amap_19"
+      type: response
+      require-body: true
+      max-size: -1
+      timeout: 60
+
+script-providers:
+  "amdc_17":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/amdc.js
+    interval: 86400
+  "amap_19":
+    url: https://github.com/ddgksf2013/Scripts/raw/master/amap.js
+    interval: 86400
